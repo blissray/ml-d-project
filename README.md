@@ -22,7 +22,7 @@
 - 강사: 최성철 교수 (sc82.choi@gachon.ac.kr, Director of TEAMLAB)
 - OpenTalk: [카카오오픈톡](https://open.kakao.com/o/g0E52ADb)
 
-![](./img/opentalk.png)
+![](./img/opentalk.jpg)
 
 - 강의게시판: [클라썸 씸플리](https://classum.it/s/sq21lb)
 
