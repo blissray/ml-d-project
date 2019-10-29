@@ -35,7 +35,7 @@
   - 강의자료 - [전체](https://teamlab-gachon.s3.ap-northeast-2.amazonaws.com/dsme/time-series-handling.pdf), [time-series code](./code/time-series)
 ### Ch 4 - Data process
   - 주요내용 - 머신러닝 시행을 위한 데이터 전처리, 엔지니어링, 클리닝
-  - 강의자료 - [전체](https://teamlab-gachon.s3.ap-northeast-2.amazonaws.com/dsme/time-series-handling.pdf), [code](./code/time-series)
+  - 강의자료 - [전체](https://teamlab-gachon.s3.ap-northeast-2.amazonaws.com/dsme/0_road-to-ML.pdf), [code](./code/time-series)
 ### Ch 5 - Machine Learning Models
   - 주요내용 - Linera Regression 부터 XGBoost 까지 ML에서 사용하는 다양한 모델에 대한 이해
   - 강의자료 - [전체](https://teamlab-gachon.s3.ap-northeast-2.amazonaws.com/dsme/models_part_1.pdf), [code](./code/models)
