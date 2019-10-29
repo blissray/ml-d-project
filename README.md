@@ -22,11 +22,20 @@
 - 강사: 최성철 교수 (sc82.choi@gachon.ac.kr, Director of TEAMLAB)
 - OpenTalk: [카카오오픈톡](https://open.kakao.com/o/g0E52ADb)
 
-![](./img/opentalk.jpg)
-
-- 강의게시판: [클라썸 씸플리](https://classum.it/s/sq21lb)
-
 # 강의일정
+1. Ch 1 - 파이썬의 이해
+  - 강의자료 - [ppt](https://teamlab-gachon.s3.ap-northeast-2.amazonaws.com/dsme/python_all.pdf), [code](./code/python)
+  - 강의영상 - [Python 강의 목록](https://github.com/TeamLab/introduction_to_python_TEAMLAB_MOOC)
+2. Ch 2 - Python Machine Learning Ecosystem
+  - 주요내용 - ML의 이해, Numpy, Pandas, Matplotlib 활용 방법
+  - 강의자료 - [전체](https://teamlab-gachon.s3.ap-northeast-2.amazonaws.com/dsme/ML_DL-for-DSME-ML-1st_%EA%B7%B8%EB%A6%BC.pdf), [numpy code](./code/numpy), [pandas code](./code/pandas), [matplotlib code](./code/matplotlib)
+  - 강의영상 - [ML 강의 목록](./ml_list.md)
+
+3. Ch 3 - Timeseries
+  - 주요내용 - ML의 이해, Numpy, Pandas, Matplotlib 활용 방법
+  - 강의자료 - [전체](), [numpy code](), [pandas code](), [matplotlib code]()
+  - 강의영상 - [Python 강의 목록]()
+
 | 차수 	| 날짜     	| 교육목표           	| 강의자료 	|
 |------	|----------	|--------------------	|----------	|
 | 1    	| 9월09일  	| 파이썬의 이해 I    	| [ppt](https://drive.google.com/open?id=1auhbdAzellz7by2n8dQu3ILzJqWkHq-1), [code](./code/python)	|
