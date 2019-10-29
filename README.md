@@ -23,34 +23,20 @@
 - OpenTalk: [카카오오픈톡](https://open.kakao.com/o/g0E52ADb)
 
 # 강의일정
-1. Ch 1 - 파이썬의 이해
+### Ch 1 - 파이썬의 이해
   - 강의자료 - [ppt](https://teamlab-gachon.s3.ap-northeast-2.amazonaws.com/dsme/python_all.pdf), [code](./code/python)
   - 강의영상 - [Python 강의 목록](https://github.com/TeamLab/introduction_to_python_TEAMLAB_MOOC)
-2. Ch 2 - Python Machine Learning Ecosystem
+### Ch 2 - Python Machine Learning Ecosystem
   - 주요내용 - ML의 이해, Numpy, Pandas, Matplotlib 활용 방법
   - 강의자료 - [전체](https://teamlab-gachon.s3.ap-northeast-2.amazonaws.com/dsme/ML_DL-for-DSME-ML-1st_%EA%B7%B8%EB%A6%BC.pdf), [numpy code](./code/numpy), [pandas code](./code/pandas), [matplotlib code](./code/matplotlib)
   - 강의영상 - [ML 강의 목록](./ml_list.md)
-
-3. Ch 3 - Timeseries
-  - 주요내용 - ML의 이해, Numpy, Pandas, Matplotlib 활용 방법
-  - 강의자료 - [전체](), [numpy code](), [pandas code](), [matplotlib code]()
-  - 강의영상 - [Python 강의 목록]()
-
-| 차수 	| 날짜     	| 교육목표           	| 강의자료 	|
-|------	|----------	|--------------------	|----------	|
-| 1    	| 9월09일  	| 파이썬의 이해 I    	| [ppt](https://drive.google.com/open?id=1auhbdAzellz7by2n8dQu3ILzJqWkHq-1), [code](./code/python)	|
-| 2    	| 9월10일  	| 파이썬의 이해 II   	| [ppt](https://drive.google.com/open?id=1auhbdAzellz7by2n8dQu3ILzJqWkHq-1), [code](./code/python) 	|
-| 3    	| 9월23일  	| 데이처 전처리 #1   	|          	|
-| 4    	| 9월24일  	| 데이처 전처리 #2 + EDA 	|          	|
-| 5    	| 9월30일  	| ML 알고리즘 #1     	|          	|
-| 6    	| 10월1일  	| ML 알고리즘 #2     	|          	|
-| 7    	| 10월14일 	| ML 알고리즘 #3     	|          	|
-| 8    	| 10월15일 	| ML 알고리즘 #4     	|          	|
-| 9    	| 10월21일 	| ML 알고리즘 #5     	|          	|
-| 10   	| 10월22일 	| Real Data Handling 	|          	|
-| 11   	| 11월4일  	| DL 알고리즘 #1     	|          	|
-| 12   	| 11월5일  	| DL for 이미지      	|          	|
-| 13   	| 11월11일 	| DL for Text        	|          	|
-| 14   	| 11월12일 	| DL for Sequence    	|          	|
-| 15   	| 11월25일 	| ELK 스택           	|          	|
-| 16   	| 11월26일 	| ELK 스택           	|          	|
+### Ch 3 - Timeseries
+  - 주요내용 - 시계열 데이터 처리방법
+  - 강의자료 - [전체](https://teamlab-gachon.s3.ap-northeast-2.amazonaws.com/dsme/time-series-handling.pdf), [time-series code](./code/time-series)
+### Ch 4 - Data process
+  - 주요내용 - 머신러닝 시행을 위한 데이터 전처리, 엔지니어링, 클리닝
+  - 강의자료 - [전체](https://teamlab-gachon.s3.ap-northeast-2.amazonaws.com/dsme/time-series-handling.pdf), [code](./code/time-series)
+### Ch 5 - Machine Learning Models
+  - 주요내용 - Linera Regression 부터 XGBoost 까지 ML에서 사용하는 다양한 모델에 대한 이해
+  - 강의자료 - [전체](https://teamlab-gachon.s3.ap-northeast-2.amazonaws.com/dsme/models_part_1.pdf), [code](./code/models)
+  - 강의영상 - [ML 강의 목록](./ml_list.md) #Chapter 7 이후
