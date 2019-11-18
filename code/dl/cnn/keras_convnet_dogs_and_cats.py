@@ -7,7 +7,7 @@ from tensorflow.keras import layers
 
 
 def build_label(dataset):
-  return [1 if "dog" in filename else 0 for filename in dataset ]
+    return ["dog" if "dog" in filename else "cat" for filename in dataset ]
 
 
 original_dataset_dir = './dataset/dogs_and_cats'

@@ -8,7 +8,8 @@ from tensorflow.keras.applications import VGG16
 
 
 def build_label(dataset):
-  return [1 if "dog" in filename else 0 for filename in dataset ]
+  return ["dog" if "dog" in filename else "cat" for filename in dataset ]
+  
 
 conv_base = VGG16(weights='imagenet', include_top=False, input_shape=(150,150,3))
 
