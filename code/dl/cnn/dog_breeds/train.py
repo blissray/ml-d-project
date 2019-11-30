@@ -1,11 +1,23 @@
 from model import ResNet50ForDogBreed
+from model import VGG16ForDogBreed
+
 from tensorflow.keras import optimizers
 from tensorflow.keras import losses
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
-import os
+from tensorflow.keras import callbacks
 
+
+import os
 from absl import app
 from absl import flags
+
+FLAGS = flags.FLAGS
+flags.DEFINE_string("model_name", "VGG16",
+                     "Choose the model name - VGG16 or ResNet50")
+flags.DEFINE_float("learning_rate", 0.01,
+                     "Input a learning rate for your optimizer")
+flags.DEFINE_string("optimizer", "adam",
+                     "Choose the optimizer - SGD, RMSProp, ADAM")
 
 def _make_generator(train, dataset_path, 
                     target_size = (224,224), batch_size=512):
@@ -22,11 +34,19 @@ def _make_generator(train, dataset_path,
     return generator 
 
 def _make_optimizer():
-    learning_rate = 0.01
-    beta_1 = 0.9
-    beta_2 = 0.99
-    epsilon = 0.0000001
-    optimizer = optimizers.Adam(learning_rate, beta_1, beta_2, epsilon)
+    learning_rate = FLAGS.learning_rate
+    if FLAGS.optimizer.lower() == "sgd":
+        optimizer = optimizers.SGD(
+            learning_rate)
+    if FLAGS.optimizer.lower() == "rmsprop":
+        optimizer = optimizers.RMSProp(
+            learning_rate)
+    if FLAGS.optimizer.lower() == "adam":    
+        beta_1 = 0.9
+        beta_2 = 0.99
+        epsilon = 0.0000001
+        optimizer = optimizers.Adam(
+            learning_rate, beta_1, beta_2, epsilon)
     return optimizer
 
 def _number_of_files(dir_path):
@@ -36,7 +56,11 @@ def _number_of_files(dir_path):
     return file_counter
 
 def main(args):
-    model = ResNet50ForDogBreed(input_shape=(224,224,3))
+    if FLAGS.model_name == "VGG16":
+        model = VGG16ForDogBreed(input_shape=(224,224,3))
+    if FLAGS.model_name == "ResNet50":
+        model = ResNet50ForDogBreed(input_shape=(224,224,3))
+
     optimizer = _make_optimizer()
     model.compile(loss="sparse_categorical_crossentropy",
               optimizer=optimizer,
@@ -60,23 +84,33 @@ def main(args):
     STEP_SIZE_VALID= number_of_val_files // batch_size
 
 
+    CHECKPOINT_DIR = "checkpoints"
+    if os.path.exists(CHECKPOINT_DIR) is not True:
+        os.mkdir(CHECKPOINT_DIR)
+
+    import json
+    with open('download_conf.json') as json_file:
+        download_conf = json.load(json_file)
+    
+    model_info = "{0}/model-{1}_optimizer-{2}_dataset-{3}".format(
+        CHECKPOINT_DIR, FLAGS.model_name, FLAGS.optimizer, 
+        download_conf["dataset"]
+    )
+    csv_logger = callbacks.CSVLogger('training.log')
+    checkpointer = callbacks.ModelCheckpoint(
+        filepath= model_info+'_{epoch:03d}_{val_acc:.2f}_{val_loss:.2f}.hdf5'
+        , verbose=1, save_best_only=False)
+    
+    callbacks_list = [csv_logger, checkpointer]
+
     model.fit_generator(
         train_generator,
         steps_per_epoch=STEP_SIZE_TRAIN,
         epochs=epochs,
         validation_data=val_generator,
-        validation_steps=STEP_SIZE_VALID)
-    model.save_weights('first_try.h5')  # always save your weights after training or during training
+        validation_steps=STEP_SIZE_VALID,
+        callbacks=callbacks_list)
 
 if __name__ == '__main__':
     app.run(main)
-
-
-
-
-    # from tensorflow.keras.callbacks import EarlyStopping
-    # early_stopping = EarlyStopping(patience=10, restore_best_weights=True, monitor="val_accuracy")
-
-
-    #model.fit(dataset, epochs=epochs)
 
