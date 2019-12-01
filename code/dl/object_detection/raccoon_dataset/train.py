@@ -61,8 +61,7 @@ def create_training_instances(
 
     return train_ints, valid_ints, sorted(labels), max_box_per_image
 
-def create_callbacks(saved_weights_name, tensorboard_logs, model_to_save):
-    makedirs(tensorboard_logs)
+def create_callbacks(saved_weights_name, model_to_save):
     
     early_stop = EarlyStopping(
         monitor     = 'loss', 
@@ -90,12 +89,7 @@ def create_callbacks(saved_weights_name, tensorboard_logs, model_to_save):
         cooldown = 0,
         min_lr   = 0
     )
-    tensorboard = CustomTensorBoard(
-        log_dir                = tensorboard_logs,
-        write_graph            = True,
-        write_images           = True,
-    )    
-    return [early_stop, checkpoint, reduce_on_plateau, tensorboard]
+    return [early_stop, checkpoint, reduce_on_plateau ]
 
 def create_model(
     nb_class, 
@@ -244,7 +238,7 @@ def _main_(args):
     ###############################
     #   Kick off the training
     ###############################
-    callbacks = create_callbacks(config['train']['saved_weights_name'], config['train']['tensorboard_dir'], infer_model)
+    callbacks = create_callbacks(config['train']['saved_weights_name'], infer_model)
 
     train_model.fit_generator(
         generator        = train_generator, 

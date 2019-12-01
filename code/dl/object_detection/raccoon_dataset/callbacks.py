@@ -16,7 +16,7 @@ class CustomTensorBoard(TensorBoard):
             for name, value in logs.items():
                 if name in ['batch', 'size']:
                     continue
-                summary = tf.Summary()
+                summary = tf.summary
                 summary_value = summary.value.add()
                 summary_value.simple_value = value.item()
                 summary_value.tag = name
