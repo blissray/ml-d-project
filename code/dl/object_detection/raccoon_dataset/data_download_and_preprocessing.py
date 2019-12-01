@@ -19,9 +19,11 @@ from shutil import rmtree
 
 
 RACCOON_DATA_URL = "https://storage.googleapis.com/teamlab-data/raccoon_dataset.zip"
+RACCOON_MODEL_URL = "https://storage.googleapis.com/teamlab-data/raccoon.h5"
 DATA_DIR = "data"
-FLAGS = flags.FLAGS
+MODEL_DIR = "models"
 
+FLAGS = flags.FLAGS
 # Required flag.
 #flags.mark_flag_as_required("name")
 
@@ -34,6 +36,10 @@ def _data_downlad(dataset_name):
   if dataset_name == "RACCOON":
     download_path = os.path.join(DATA_DIR, "raccoon_dataset.zip")
     wget.download(RACCOON_DATA_URL, download_path)
+  if dataset_name == "MODEL":
+    download_path = os.path.join(MODEL_DIR, "raccoon.h5")
+    wget.download(RACCOON_MODEL_URL, download_path)
+
 
 def _xml_to_df(path):
     xml_list = []
@@ -60,6 +66,7 @@ def main(args):
   if FLAGS.reset == True:
     print("Now, deleting current all downloaded dataset")
     rmtree(DATA_DIR)
+    rmtree(MODEL_DIR)
     print("Done")
 
   if os.path.exists(DATA_DIR) is not True:
@@ -131,11 +138,12 @@ def main(args):
       os.path.join(DATA_DIR,'val_raccoon_labels.csv'), index=None)
 
   print('Successfully converted xml to csv.')
-  
 
-
-
-
+  if os.path.exists(MODEL_DIR) is not True:
+    os.mkdir(MODEL_DIR)
+    print("Make 'models' directory ")
+    _data_downlad("MODEL")
+    print("\nRaccoon YOLOv3 pretraind-model download is done")
 
 if __name__ == '__main__':
   app.run(main)
