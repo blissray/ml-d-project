@@ -96,10 +96,11 @@ def main(args):
         CHECKPOINT_DIR, FLAGS.model_name, FLAGS.optimizer, 
         download_conf["dataset"]
     )
-    csv_logger = callbacks.CSVLogger('training.log')
+    csv_logger = callbacks.CSVLogger('{0}_{1}_training.log'.format(FLAGS.model_name, download_conf["dataset"]))
     checkpointer = callbacks.ModelCheckpoint(
-        filepath= model_info+'_{epoch:03d}_{val_acc:.2f}_{val_loss:.2f}.hdf5'
-        , verbose=1, save_best_only=False)
+        filepath= model_info+'_{epoch:03d}_{val_accuracy:.2f}_{val_loss:.2f}.hdf5',
+        monitor='val_loss', 
+        verbose=1, save_best_only=False)
     
     callbacks_list = [csv_logger, checkpointer]
 
