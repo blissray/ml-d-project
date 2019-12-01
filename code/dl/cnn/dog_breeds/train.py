@@ -104,6 +104,16 @@ def main(args):
     
     callbacks_list = [csv_logger, checkpointer]
 
+    MODEL_REPOSITORY_DIR = "models"
+    if os.path.exists(MODEL_REPOSITORY_DIR) is not True:
+        os.mkdir(MODEL_REPOSITORY_DIR)
+    json_config = model.to_json()
+    model_path = "{0}/model-{1}.json".format(
+        MODEL_REPOSITORY_DIR, FLAGS.model_name
+    )
+    with open(model_path, 'w') as json_file:
+        json_file.write(json_config)
+
     model.fit_generator(
         train_generator,
         steps_per_epoch=STEP_SIZE_TRAIN,

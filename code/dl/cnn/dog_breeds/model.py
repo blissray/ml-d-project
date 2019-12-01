@@ -28,6 +28,18 @@ class VGG16ForDogBreed(Model):
         x = self.relu_layer(x)
         return self.last_layer(x)
 
+    def get_config(self):
+        config = {'name': self.__class__.__name__, 
+            'base_model': self.base_model.get_config(),
+            'flatten': self.flatten,
+            'dense_layer': self.dense_layer,
+            'batch_layer': self.batch_layer,
+            'relu_layer': self.relu_layer,
+            'last_layer': self.last_layer
+        }
+        
+        return list(config.items())
+
 class ResNet50ForDogBreed(Model):
     def __init__(self, input_shape =(224, 224,3), num_classes=120):
         # call the parent constructor
@@ -51,4 +63,14 @@ class ResNet50ForDogBreed(Model):
         x = self.relu_layer(x)
         return self.last_layer(x)
 
+    def get_config(self):
+        config = {'name': self.__class__.__name__, 
+            'base_model': self.base_model.get_config(),
+            'flatten': self.flatten,
+            'dense_layer': self.dense_layer,
+            'batch_layer': self.batch_layer,
+            'relu_layer': self.relu_layer,
+            'last_layer': self.last_layer
+        }
 
+        return list(config.items()))
