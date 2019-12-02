@@ -33,7 +33,7 @@ def data_gen(img_folder, mask_folder, batch_size, is_train=False):
 
       train_mask = cv2.imread(mask_folder+'/'+n[i], cv2.IMREAD_GRAYSCALE)/255.
       train_mask = cv2.resize(train_mask, (BASE_SIZE, BASE_SIZE))
-    #   train_mask = train_mask.reshape(BASE_SIZE, BASE_SIZE, 1) # Add extra dimension for parity with train_img size [512 * 512 * 3]
+      # train_mask = train_mask.reshape(BASE_SIZE, BASE_SIZE, 1) # Add extra dimension for parity with train_img size [512 * 512 * 3]
       if is_train:
         # train_img = randomHueSaturationValue(train_img,
         #                             hue_shift_limit=(-50, 50),
@@ -45,7 +45,7 @@ def data_gen(img_folder, mask_folder, batch_size, is_train=False):
                                         rotate_limit=(-20, 20))
         train_img, train_mask = randomHorizontalFlip(train_img, train_mask)
         # fix_mask(mask)
-        train_mask = np.expand_dims(train_mask, axis=2)
+      train_mask = np.expand_dims(train_mask, axis=2)
 
       img[i-c] = train_img #add to array - img[0], img[1], and so on.
       mask[i-c] = train_mask
