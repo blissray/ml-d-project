@@ -38,6 +38,8 @@ def get_pairs_from_paths(images_path, segs_path, ignore_non_matching=False):
     image_files = []
     segmentation_files = {}
 
+    print(images_path)
+
     for dir_entry in os.listdir(images_path):
         if os.path.isfile(os.path.join(images_path, dir_entry)) and \
                 os.path.splitext(dir_entry)[1] in ACCEPTABLE_IMAGE_FORMATS:
