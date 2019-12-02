@@ -168,7 +168,7 @@ def main():
     VAL_STEPS_PER_EPOCH = NO_OF_VAL_IMAGES // BATCH_SIZE
 
     model.compile(optimizer=opt, 
-                  loss=bce_dice_loss, 
+                  loss="sparse_categorical_crossentropy", 
                   metrics=[dice_coeff])    
     model.fit_generator(generator=train_gen,
                     epochs=epochs,
