@@ -44,7 +44,7 @@ def data_gen(img_folder, mask_folder, batch_size, is_train=False):
                                         rotate_limit=(-20, 20))
         train_img, train_mask = randomHorizontalFlip(train_img, train_mask)
         # fix_mask(mask)
-        train_mask = np.expand_dims(train_mask, axis=2)
+      train_mask = np.expand_dims(train_mask, axis=2)
 
       img[i-c] = train_img #add to array - img[0], img[1], and so on.
       mask[i-c] = train_mask
