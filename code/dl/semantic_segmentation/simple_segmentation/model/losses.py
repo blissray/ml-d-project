@@ -4,12 +4,11 @@ from tensorflow.keras import backend as K
 
 def dice_coeff(y_true, y_pred):
     smooth = 1.
-    y_true_f = K.flatten(y_true)
-    y_pred_f = K.flatten(y_pred)
-    intersection = K.sum(y_true_f * y_pred_f)
-    score = (2. * intersection + smooth) / (K.sum(y_true_f) + K.sum(y_pred_f) + smooth)
-    return score
-
+    y_true_f = K.flatten(K.one_hot(K.cast(y_true, 'int32'), num_classes=11)[...,1:])
+    y_pred_f = K.flatten(y_pred[...,1:])
+    intersect = K.sum(y_true_f * y_pred_f, axis=-1)
+    denom = K.sum(y_true_f + y_pred_f, axis=-1)
+    return K.mean((2. * intersect / (denom + smooth)))
 
 def dice_loss(y_true, y_pred):
     loss = 1 - dice_coeff(y_true, y_pred)

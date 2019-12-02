@@ -14,7 +14,7 @@ from tensorflow.keras.optimizers import Adam
 from model.losses import bce_dice_loss, dice_loss, weighted_bce_dice_loss, weighted_dice_loss, dice_coeff
 
 SIZE = (256, 256)
-BASE_SIZE = 128
+BASE_SIZE = 256
 def data_gen(img_folder, mask_folder, batch_size, is_train=False):
   c = 0
   n = os.listdir(img_folder) #List of training images
@@ -26,14 +26,13 @@ def data_gen(img_folder, mask_folder, batch_size, is_train=False):
 
     for i in range(c, c+batch_size): #initially from 0 to 16, c = 0. 
 
-      train_img = cv2.imread(img_folder+'/'+n[i])/255.
+      train_img = cv2.imread(img_folder+'/'+n[i])
       train_img = cv2.resize(train_img, (BASE_SIZE, BASE_SIZE))
       # Read an image from folder and resize
                                                          
-
-      train_mask = cv2.imread(mask_folder+'/'+n[i], cv2.IMREAD_GRAYSCALE)/255.
+      train_mask = cv2.imread(mask_folder+'/'+n[i], cv2.IMREAD_GRAYSCALE)
       train_mask = cv2.resize(train_mask, (BASE_SIZE, BASE_SIZE))
-      # train_mask = train_mask.reshape(BASE_SIZE, BASE_SIZE, 1) # Add extra dimension for parity with train_img size [512 * 512 * 3]
+    #   train_mask = train_mask.reshape(BASE_SIZE, BASE_SIZE, 1) # Add extra dimension for parity with train_img size [512 * 512 * 3]
       if is_train:
         # train_img = randomHueSaturationValue(train_img,
         #                             hue_shift_limit=(-50, 50),
@@ -45,7 +44,7 @@ def data_gen(img_folder, mask_folder, batch_size, is_train=False):
                                         rotate_limit=(-20, 20))
         train_img, train_mask = randomHorizontalFlip(train_img, train_mask)
         # fix_mask(mask)
-      train_mask = np.expand_dims(train_mask, axis=2)
+        train_mask = np.expand_dims(train_mask, axis=2)
 
       img[i-c] = train_img #add to array - img[0], img[1], and so on.
       mask[i-c] = train_mask
@@ -111,7 +110,7 @@ def fix_mask(mask):
 #     return (img, mask)
 
 def main():
-    model = unet.get_unet_128(num_classes=1)
+    model = unet.get_unet_256(num_classes=11)
 
     # Save Model Info
     MODEL_REPOSITORY_DIR = "model_repo"
@@ -168,7 +167,7 @@ def main():
     VAL_STEPS_PER_EPOCH = NO_OF_VAL_IMAGES // BATCH_SIZE
 
     model.compile(optimizer=opt, 
-                  loss="sparse_categorical_crossentropy", 
+                  loss=dice_loss, 
                   metrics=[dice_coeff])    
     model.fit_generator(generator=train_gen,
                     epochs=epochs,

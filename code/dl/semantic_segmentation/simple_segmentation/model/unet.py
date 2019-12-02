@@ -106,8 +106,13 @@ def get_unet_128(input_shape=(128, 128, 3),
     up1 = Activation('relu')(up1)
     # 128
 
-    classify = Conv2D(num_classes, (1, 1), activation='sigmoid')(up1)
-    model = Model(inputs=inputs, outputs=classify)
+    output_layer = Conv2D(filters=num_classes, kernel_size=(1, 1))(up1)
+    output_layer = BatchNormalization()(output_layer)
+    if num_classes == 1:
+        output_layer = Activation('sigmoid')(output_layer)
+    else:
+        output_layer = Activation('softmax')(output_layer)
+    model = Model(inputs=inputs, outputs=output_layer)
 
 
     return model
@@ -236,11 +241,13 @@ def get_unet_256(input_shape=(256, 256, 3),
     up0 = Activation('relu')(up0)
     # 256
 
-    classify = Conv2D(num_classes, (1, 1), activation='sigmoid')(up0)
-
-    model = Model(inputs=inputs, outputs=classify)
-
-    # model.compile(optimizer=RMSprop(lr=0.0001), loss=bce_dice_loss, metrics=[dice_coeff])
+    output_layer = Conv2D(filters=num_classes, kernel_size=(1, 1))(up0)
+    output_layer = BatchNormalization()(output_layer)
+    if num_classes == 1:
+        output_layer = Activation('sigmoid')(output_layer)
+    else:
+        output_layer = Activation('softmax')(output_layer)
+    model = Model(inputs=inputs, outputs=output_layer)
 
     return model
 
@@ -390,11 +397,13 @@ def get_unet_512(input_shape=(512, 512, 3),
     up0a = Activation('relu')(up0a)
     # 512
 
-    classify = Conv2D(num_classes, (1, 1), activation='sigmoid')(up0a)
-
-    model = Model(inputs=inputs, outputs=classify)
-
-    # model.compile(optimizer=RMSprop(lr=0.0001), loss=bce_dice_loss, metrics=[dice_coeff])
+    output_layer = Conv2D(filters=num_classes, kernel_size=(1, 1))(up0a)
+    output_layer = BatchNormalization()(output_layer)
+    if num_classes == 1:
+        output_layer = Activation('sigmoid')(output_layer)
+    else:
+        output_layer = Activation('softmax')(output_layer)
+    model = Model(inputs=inputs, outputs=output_layer)
 
     return model
 
@@ -566,10 +575,12 @@ def get_unet_1024(input_shape=(1024, 1024, 3),
     up0b = Activation('relu')(up0b)
     # 1024
 
-    classify = Conv2D(num_classes, (1, 1), activation='sigmoid')(up0b)
-
-    model = Model(inputs=inputs, outputs=classify)
-
-    # model.compile(optimizer=RMSprop(lr=0.0001), loss=bce_dice_loss, metrics=[dice_coeff])
+    output_layer = Conv2D(filters=num_classes, kernel_size=(1, 1))(up0b)
+    output_layer = BatchNormalization()(output_layer)
+    if num_classes == 1:
+        output_layer = Activation('sigmoid')(output_layer)
+    else:
+        output_layer = Activation('softmax')(output_layer)
+    model = Model(inputs=inputs, outputs=output_layer)
 
     return model
