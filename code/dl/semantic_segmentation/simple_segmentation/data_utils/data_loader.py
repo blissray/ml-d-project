@@ -14,7 +14,11 @@ except ImportError:
         return iter
 
 
-from ..models.config import IMAGE_ORDERING
+IMAGE_ORDERING_CHANNELS_LAST = "channels_last"
+IMAGE_ORDERING_CHANNELS_FIRST = "channels_first"
+
+# Default IMAGE_ORDERING = channels_last
+IMAGE_ORDERING = IMAGE_ORDERING_CHANNELS_LAST
 from .augmentation import augment_seg
 
 DATA_LOADER_SEED = 0
