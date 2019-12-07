@@ -14,7 +14,7 @@ from tensorflow.keras.optimizers import Adam
 from model.losses import bce_dice_loss, dice_loss, weighted_bce_dice_loss, weighted_dice_loss, dice_coeff
 
 SIZE = (256, 256)
-BASE_SIZE = 256
+BASE_SIZE = 1024 
 def data_gen(img_folder, mask_folder, batch_size, is_train=False):
   c = 0
   n = [filename for filename in os.listdir(img_folder) if filename.endswith("jpg") ] #List of training images
@@ -109,7 +109,7 @@ def fix_mask(mask):
 #     return (img, mask)
 
 def main():
-    model = unet.get_unet_256(num_classes=5)
+    model = unet.get_unet_1024(num_classes=5)
 
     # Save Model Info
     MODEL_REPOSITORY_DIR = "model_repo"
@@ -156,7 +156,8 @@ def main():
     # val_mask_path = '/path/to/validation_frames'
 
     # Train the model
-    BATCH_SIZE = 4
+    BATCH_SIZE = 1
+
     train_gen = data_gen(
         IMAGE_TRAIN_PATH,ANNO_TRAIN_PATH, 
         batch_size = BATCH_SIZE, is_train=True)
