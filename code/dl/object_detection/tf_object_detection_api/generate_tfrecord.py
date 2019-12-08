@@ -55,7 +55,7 @@ def split(df, group):
 
 def create_tf_example(group, path, filename):
     filename = filename + ".jpg"
-    with tf.io.gfile.GFile(os.path.join(path, '{}'.format(filename)), 'rb') as fid:
+    with tf.gfile.GFile(os.path.join(path, '{}'.format(filename)), 'rb') as fid:
         encoded_jpg = fid.read()
     encoded_jpg_io = io.BytesIO(encoded_jpg)
     image = Image.open(encoded_jpg_io)
@@ -114,7 +114,7 @@ def main(_):
         for key, group in examples.groupby(["filename"]):
             class_name = group["class"].tolist()[0]
             path = os.path.join(image_path, class_name)
-            writer = tf.io.TFRecordWriter(
+            writer = tf.python_io.TFRecordWriter(
                 os.path.join(tf_records_path, key+".tfrecords"))
             tf_example = create_tf_example(group, path, key)
             writer.write(tf_example.SerializeToString())
