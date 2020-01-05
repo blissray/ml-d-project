@@ -49,7 +49,7 @@ def main():
         for key, value in result.items():
             outfile.write(
                template.format(
-                   value, key) 
+                   value+1, key) 
             )
         
 
