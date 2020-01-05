@@ -1,5 +1,4 @@
 # load Flask
-import flask
 from flask import Flask
 from flask import jsonify
 from flask import redirect
@@ -9,11 +8,9 @@ from flask import request
 from datetime import datetime
 import os
 
-import tempfile
-import tensorflow as tf
 from tensorflow import keras
-from tensorflow.keras.preprocessing.image import ImageDataGenerator
-import tempfile
+from PIL import Image
+import numpy as np
 
 app = Flask(__name__)
 app.config.from_object(__name__)
@@ -39,7 +36,10 @@ def predict():
                         now.strftime("%Y-%m-%d-%H-%M-%S-%f"),
                         file.filename.rsplit('.', 1)[1]))
             file.save(filename)
-            data = {"success": False}
+            im = Image.open(filename).resize((224, 224))
+            np_im = numpy.array(im).reshape(1, 224,224, 3)
+            result = model.predict_proba(np_im)
+            data = {"result": result}
             return flask.jsonify(data)
 
     # data = {"success": False}
