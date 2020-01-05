@@ -7,6 +7,9 @@ from flask import url_for
 from flask import request
 
 from datetime import datetime
+import os
+
+
 
 app = Flask(__name__)
 
@@ -16,6 +19,7 @@ from tensorflow import keras
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 import tempfile
 
+ALLOWED_EXTENSIONS = ['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif']
 
 CHECKPOINT_DIR = "checkpoints"
 model_list = sorted([os.path.join(CHECKPOINT_DIR, filename)
