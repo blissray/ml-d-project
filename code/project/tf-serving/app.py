@@ -23,6 +23,8 @@ model_list = sorted([os.path.join(CHECKPOINT_DIR, filename)
                      for filename in os.listdir(CHECKPOINT_DIR)])
 
 new_model = keras.models.load_model(model_list[-1])
+breeds = sorted(os.listdir("./data/val"))
+breed_dict = {idx: breed for idx, breed in enumerate(breeds)}
 
 # define a predict function as an endpoint
 @app.route("/predict", methods=["GET", "POST"])
@@ -37,10 +39,15 @@ def predict():
                         file.filename.rsplit('.', 1)[1]))
             file.save(filename)
             im = Image.open(filename).resize((224, 224))
-            np_im = numpy.array(im).reshape(1, 224,224, 3)
-            result = model.predict_proba(np_im)
-            data = {"result": result}
-            return flask.jsonify(data)
+            np_im = np.array(im).reshape(1, 224, 224, 3)
+            np_im = np_im / 1.0
+            result = new_model.predict_proba(np_im)
+            idx = np.argmax(result)
+
+            print(breed_dict)
+
+            data = {"breed": breed_dict[idx], "prob": result[idx]}
+            return jsonify(data)
 
     # data = {"success": False}
     # # get the request parameters
