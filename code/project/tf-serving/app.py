@@ -41,21 +41,13 @@ def predict():
             im = Image.open(filename).resize((224, 224))
             np_im = np.array(im).reshape(1, 224, 224, 3)
             np_im = np_im / 1.0
-            result = new_model.predict_proba(np_im)
+            result = new_model.predict_proba(np_im).reshape(120)
             idx = np.argmax(result)
 
-            print(breed_dict)
 
-            data = {"breed": breed_dict[idx], "prob": result[idx]}
+            data = {"breed": breed_dict[idx], "prob": float(result[idx])}
             return jsonify(data)
 
-    # data = {"success": False}
-    # # get the request parameters
-    # params = flask.request.json
-    # if (params == None):
-    #     params = flask.request.args
-    # # if parameters are found, echo the msg parameter 
-    # if (params != None):
     #     data["response"] = params.get("msg")
     #     data["success"] = True
     # # return a response in json format 
