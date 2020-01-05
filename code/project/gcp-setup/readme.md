@@ -53,6 +53,7 @@ conda create -n tf20 python=3.6
 - 기본적인 패키지 설치하기
 
 ```bash
+pip install flask
 pip install wget
 pip install tensorflow-gpu
 pip install matplotlib
